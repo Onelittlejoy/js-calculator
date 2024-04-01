@@ -12,8 +12,23 @@ function App() {
     setInputValue('0');
   }
 
-  const handleResult = (e) => {
-    const resultCal = eval(displayValue.toString())
+  const handleResult = (e) => { // displayValue=5*-+5 = 10
+    let result = ""; // 5
+    for (let i = 0; i < displayValue.length; i++) { //displayValue[1]=*
+      if (['+', '-', '/', '*'].includes(displayValue[i])) {
+        if (['+', '/', '*'].includes(displayValue[i + 1])) { // displayValue[2]=-
+          if (['+', '-', '/', '*'].includes(displayValue[i - 1])) { //displayValue[2]=-
+            result = result.slice(0, i - 1);
+          }
+        } else {
+          result += displayValue[i];
+        }
+      } else {
+        result += displayValue[i];
+      }
+    }
+
+    const resultCal = eval(result.toString())
     setDisplayValue(resultCal);
     setInputValue(resultCal);
   }
@@ -24,38 +39,24 @@ function App() {
       setInputValue(e.target.value);
       setDisplayValue(e.target.value);
     } else {
-      setInputValue( inputValue + e.target.value);
+      setInputValue(inputValue + e.target.value);
       setDisplayValue((prevDisplayValue) => prevDisplayValue + e.target.value)
     }
   }
 
 
   const handleDecimalInput = (e) => {
-  const lastNumber = displayValue.split(/[-+*/]/).pop();
-  if (lastNumber.includes('.')) {
-    return;
-  } else {
-    setInputValue((prevDisplayValue) => prevDisplayValue + e.target.value);
-    setDisplayValue((prevDisplayValue) => prevDisplayValue + e.target.value);
-  }
+    const lastNumber = displayValue.split(/[-+*/]/).pop();
+    if (lastNumber.includes('.')) {
+      return;
+    } else {
+      setInputValue((prevDisplayValue) => prevDisplayValue + e.target.value);
+      setDisplayValue((prevDisplayValue) => prevDisplayValue + e.target.value);
+    }
   }
 
   const handleSignInput = (e) => {
-    const operators = ['+', '*', '/','-'];
-    const lastChar = displayValue.toString().slice(-1);
-  
-    if (operators.includes(e.target.value) && operators.includes(lastChar) && e.target.value !== '-') {
-      const newDisplayValue = displayValue.slice(0, -1) + e.target.value;
-      setDisplayValue(newDisplayValue);
-    } else {
-      setDisplayValue(displayValue + e.target.value);
-    }
-  
-    if (operators.includes(e.target.value) && e.target.value !== '-') {
-      setInputValue(e.target.value);
-    } else {
-      setInputValue(displayValue + e.target.value);
-    }
+    setDisplayValue((prevDisplayValue) => prevDisplayValue + e.target.value);
   }
 
   return (
