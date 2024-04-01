@@ -1,5 +1,64 @@
 .App {
-  text-align: center;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto;
+  margin-top: 40px;
+}
+
+.Calculator {
+  border: 2px solid #47476b;
+    padding: 5px;
+    background: black;
+    width: 334px;
+    position: relative;
+}
+
+.formulaScreen {
+  min-height: 20px;
+  font-size: 20px;
+  color: orange;
+  background-color: white;
+  text-align: right;
+  vertical-align: text-top;
+  line-height: 20px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 320px;
+}
+
+.outputScreen {
+  font-size: 29px;
+  color: white;
+  background-color: blue;
+  text-align: right;
+  line-height: 35px;
+  width: 320px;
+}
+
+button {
+  position: relative;
+  height: 65px;
+  width: 80px;
+  color: white;
+  outline: 1px solid black;
+  border: none;
+  background: #4d4d4d;
+  font-size: 20px;
+  cursor: default;
+}
+
+.jumbo {
+  width: 160px;
+}
+
+.equal {
+  background: rgb(0, 68, 102); 
+  height: 130px; 
+  position: absolute;
+  width: 80px;
+  bottom: 5px;
 }
 
 .App-logo {
