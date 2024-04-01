@@ -44,17 +44,19 @@ function App() {
     const operators = ['+', '*', '/','-'];
     const lastChar = displayValue.toString().slice(-1);
   
-    if (operators.includes(e.target.value)) {
-      if (operators.includes(lastChar)){
-      const newDisplayValue = displayValue.slice(0,-1) + e.target.value;
+    if (operators.includes(e.target.value) && operators.includes(lastChar) && e.target.value !== '-') {
+      const newDisplayValue = displayValue.slice(0, -1) + e.target.value;
       setDisplayValue(newDisplayValue);
-      } else {
+    } else {
       setDisplayValue(displayValue + e.target.value);
     }
-    } else {
+  
+    if (operators.includes(e.target.value) && e.target.value !== '-') {
       setInputValue(e.target.value);
-      setDisplayValue(displayValue+e.target.value);
-    }}
+    } else {
+      setInputValue(displayValue + e.target.value);
+    }
+  }
 
   return (
     <div className='App'>
